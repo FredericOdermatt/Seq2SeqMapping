@@ -13,6 +13,8 @@ as the train_source and train_target files had a different number of lines I cho
 
 ## Model
 
+Some ideas for the model were taken from [here](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
+
 ### Encoder
 
 RNN Encoder using an embedding layer and gated recurrent units.
@@ -37,6 +39,12 @@ This probability distribution is compared with the output symbol we expect accor
   over all possible tokens
 ```
 ## Experimental Results
+
+Average negative log likelihood loss per sample over the hold-out evaluation set for 5 epochs:
+
+![Test](images/eval_loss.png)
+
+Some sample outputs produced by the model for source and target sentences from the evaluation set:
 
 source [33, 416, 437, 200, 35, 437, 68, 35, 140, 200, 157, 271, 68, 105, 157, 68, 140, 227, 437, 68, 416, 105, 157, 437, 68, 304, 584, 95, 68, 304, 584, 95, 437, 105, 402, 157, 437, 95, 35, 327, 659]
 target [64, 211, 108, 68, 85, 620, 149, 68, 430, 68, 569, 68, 550, 430, 68, 241, 68, 241, 211, 565, 85, 659]
@@ -78,6 +86,22 @@ source [29, 227, 200, 140, 68, 227, 437, 68, 416, 584, 584, 619, 35, 68, 416, 10
 target [283, 68, 153, 68, 494, 85, 68, 550, 501, 659]
  model 261 86 68 68 68 68 <EOS>
 
+## To improve
+
+I was very busy this week, so there are many things to improve:
+
+* more training runs with different hyper-parameters:
+  * learning rate
+  * scheduler
+  * size of hidden representation
+  * dropout ratio
+  * teacher student forcing ratio
+
+* some sentences are very long: deal with this for example by removing some outliers from training set.
+
+* implement batching, and therefore first an efficient padding algorithm
+
+* I'm unsure how efficient the encoded sequence is, check whether it can be encoded more efficiently once more
 
 ## Task Description
 
